@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Recipe } = require("../models");
-// let validateJWT = require("../middleware/validate-jwt");
+let validateJWT = require("../middleware/validate-jwt");
 
 
 
@@ -44,8 +44,8 @@ router.get("/all", async (req, res) => {
 
 
 //get spcific recipe
-// router.get("/recipe/ :id", validateJWT, async (req, res) => {
-router.get("/recipe/ :id", async (req, res) => {
+router.get("/recipe/ :id", validateJWT, async (req, res) => {
+// router.get("/recipe/ :id", async (req, res) => {
     const recipeId = req.params.id;
     const ownerid = req.user.id;
 
@@ -65,9 +65,9 @@ router.get("/recipe/ :id", async (req, res) => {
 
 
 
-//delete
-// router.delete("/delete/:id", validateJWT,  async (req, res) => {
-router.delete("/delete/:id", async (req, res) => {
+// delete
+router.delete("/delete/:id", validateJWT,  async (req, res) => {
+// router.delete("/delete/:id", async (req, res) => {
     const recipeId = req.params.id;
     const ownerId = req.user.id;
 
@@ -88,8 +88,8 @@ router.delete("/delete/:id", async (req, res) => {
 
 
 //edit
-// router.put("/update/:recipeId", validateJWT, async (req, res) => {
-router.put("/update/:recipeId", async (req, res) => {
+router.put("/update/:recipeId", validateJWT, async (req, res) => {
+// router.put("/update/:recipeId", async (req, res) => {
     const { name, directions, cookTime, servingSize, category } = req.body.recipe;
     const recipeId = req.params.recipeId;
     const { id } = req.user;
