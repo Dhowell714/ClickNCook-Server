@@ -17,18 +17,18 @@ app.use(express.json());
 // app.use(require("./middleware/validate-jwt"));
 app.use("/recipe", controllers.recipecontroller);
 
-// db.authenticate()
-//   .then(() => db.sync()) // => {force: true}
-//   .then(() => {
-//     app.listen(3000, () =>
-//       console.log(`[Server: ] App is listening on Port ${3000}`)
-//     );
-//   })
-//   .catch((err) => {
-//     console.log("[Server:] Server Crashed");
-//     console.error(err);
-//   });
-
-app.listen(3000, () => {
-    console.log(`[Server]: App is listening on 3000.`);
+db.authenticate()
+  .then(() => db.sync()) // => {force: true}
+  .then(() => {
+    app.listen(3000, () =>
+      console.log(`[Server: ] App is listening on Port ${3000}`)
+    );
+  })
+  .catch((err) => {
+    console.log("[Server:] Server Crashed");
+    console.error(err);
   });
+
+// app.listen(3000, () => {
+//     console.log(`[Server]: App is listening on 3000.`);
+//   });
