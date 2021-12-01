@@ -1,3 +1,3 @@
 module.exports = {
-    recipeController: require("./recipeController")
+    userController: require('./usercontroller'),
 };
