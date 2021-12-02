@@ -1,4 +1,4 @@
 module.exports = {
     recipecontroller: require("./recipecontroller"),
-    userController: require('./usercontroller'),
+    usercontroller: require('./usercontroller'),
     };

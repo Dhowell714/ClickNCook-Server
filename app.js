@@ -12,7 +12,7 @@ const controllers = require("./controllers");
 
 app.use(Express.json());
 
-app.use("/user", controllers.userController)
+app.use("/user", controllers.usercontroller)
 
 // app.use(require("./middleware/validate-jwt"));
 app.use("/recipe", controllers.recipecontroller);
