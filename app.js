@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const Express = require("express");
 
-const db = require("./db");
+const dbConnection = require("./db");
 
 const app = Express();
 
@@ -17,8 +17,9 @@ app.use("/user", controllers.usercontroller)
 app.use(require("./middleware/validate-jwt"));
 app.use("/recipe", controllers.recipecontroller);
 
-db.authenticate()
-  .then(() => db.sync()) // => {force: true}
+dbConnection.authenticate()
+   //.then(() => dbConnection.sync({force: true}))
+  .then(() => dbConnection.sync()) // => {force: true}
   .then(() => {
     app.listen(3000, () =>
       console.log(`[Server: ] App is listening on Port ${3000}`)
