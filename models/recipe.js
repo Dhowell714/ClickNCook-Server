@@ -23,6 +23,14 @@ const Recipe = db.define('recipe', {
       allowNull: false
   // category determines whether it is a breakfast, lunch, or dinner food.
     },
+    ingredients: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    substitutions: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false

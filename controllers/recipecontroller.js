@@ -6,7 +6,7 @@ let {Recipe} = require("../models");
 
 //create
 router.post("/create", validateJWT, async (req, res) => {
-    const { name, directions, cookTime, servingSize, category } = req.body.recipe;
+    const { name, directions, cookTime, servingSize, category, ingredients, substitutions } = req.body.recipe;
     const { id } = req.user;
     const recipeEntry = {
         name,
@@ -14,6 +14,8 @@ router.post("/create", validateJWT, async (req, res) => {
         cookTime,
         servingSize,
         category,
+        ingredients,
+        substitutions,
         userId: id
     };
     try {
@@ -54,7 +56,7 @@ router.get("/recipe/:id", validateJWT, async (req, res) => {
                 userId: ownerId,
             },
         };
-        
+
         const entries = await Recipe.find(query);
         res.status(201).json({ entries });
     } catch (err) {
@@ -107,6 +109,8 @@ router.put("/update/:recipeId", validateJWT, async (req, res) => {
         cookTime: cookTime,
         servingSize: servingSize,
         category: category,
+        ingredients,
+        substitutions,
         userId: id
     };
 
