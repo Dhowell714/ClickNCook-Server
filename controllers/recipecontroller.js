@@ -45,15 +45,16 @@ router.get("/all", validateJWT, async (req, res) => {
 router.get("/recipe/:id", validateJWT, async (req, res) => {
 // router.get("/recipe/ :id", async (req, res) => {
     const recipeId = req.params.id;
-    const ownerid = req.user.id;
+    const ownerId = req.user.id;
 
     try {
         const query = {
             where: {
                 id: recipeId,
-                userId: ownerid,
+                userId: ownerId,
             },
         };
+        
         const entries = await Recipe.find(query);
         res.status(201).json({ entries });
     } catch (err) {
@@ -78,7 +79,7 @@ router.delete("/delete/:id", validateJWT,  async (req, res) => {
             },
         };
 
-        await Animal.destroy(query);
+        await Recipe.destroy(query);
         res.status(201).json({ message: "Item has been deleted" });
     } catch (err) {
         res.status(500).json({ error: err });
