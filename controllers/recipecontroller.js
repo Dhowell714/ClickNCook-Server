@@ -1,10 +1,11 @@
 const Express = require("express");
 const router = Express.Router();
-
+let validateJWT = require("../middleware/validate-jwt");
+let {Recipe} = require("../models");
 
 
 //create
-router.post("/create", async (req, res) => {
+router.post("/create", validateJWT, async (req, res) => {
     const { name, directions, cookTime, servingSize, category } = req.body.recipe;
     const { id } = req.user;
     const recipeEntry = {
@@ -23,13 +24,13 @@ router.post("/create", async (req, res) => {
         });
     } catch (err) {
         res.status(500).json({
-            message: "Failed to register Submission"});
+            message: "Failed to register submission"});
     }
 });
 
 
 //get all recipes
-router.get("/all", async (req, res) => {
+router.get("/all", validateJWT, async (req, res) => {
     try {
         const entries = await Recipe.findAll();
         res.status(200).json(entries);
@@ -41,7 +42,7 @@ router.get("/all", async (req, res) => {
 
 
 //get spcific recipe
-router.get("/recipe/ :id", validateJWT, async (req, res) => {
+router.get("/recipe/:id", validateJWT, async (req, res) => {
 // router.get("/recipe/ :id", async (req, res) => {
     const recipeId = req.params.id;
     const ownerid = req.user.id;
@@ -69,12 +70,14 @@ router.delete("/delete/:id", validateJWT,  async (req, res) => {
     const ownerId = req.user.id;
 
     try {
+
         const query = {
             where: {
                 id: recipeId,
                 userId: ownerId,
             },
         };
+
         await Animal.destroy(query);
         res.status(201).json({ message: "Item has been deleted" });
     } catch (err) {

@@ -6,7 +6,7 @@ const db = require("./db");
 
 const app = Express();
 
-// app.use(require("./middleware/headers"));
+app.use(require("./middleware/headers"));
 
 const controllers = require("./controllers");
 
@@ -14,7 +14,7 @@ app.use(Express.json());
 
 app.use("/user", controllers.usercontroller)
 
-// app.use(require("./middleware/validate-jwt"));
+app.use(require("./middleware/validate-jwt"));
 app.use("/recipe", controllers.recipecontroller);
 
 db.authenticate()
