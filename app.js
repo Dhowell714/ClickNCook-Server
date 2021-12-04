@@ -19,6 +19,7 @@ app.use("/recipe", controllers.recipecontroller);
 
 db.authenticate()
   .then(() => db.sync()) // => {force: true}
+  // .then(() => db.sync({force: true}) )
   .then(() => {
     app.listen(3000, () =>
       console.log(`[Server: ] App is listening on Port ${3000}`)

@@ -41,24 +41,36 @@ router.get("/all", validateJWT, async (req, res) => {
     }
 });
 
+// //get spcific recipe
+// router.get("/recipe/:id", validateJWT, async (req, res) => {
+// // router.get("/recipe/ :id", async (req, res) => {
+//     const { recipeId } = req.params.id;
+//     const { ownerId } = req.user.id;
 
+//     try {
+//         const query = {
+//             where: {
+//                 id: recipeId,
+//                 userId: ownerId,
+//             },
+//         };
 
-//get spcific recipe
-router.get("/recipe/:id", validateJWT, async (req, res) => {
-// router.get("/recipe/ :id", async (req, res) => {
-    const recipeId = req.params.id;
-    const ownerId = req.user.id;
+//         const entries = await Recipe.find(query);
+//         res.status(201).json({ entries });
+//     } catch (err) {
+//         res.status(500).json({ error: err });
+//     }
+// });
 
+//Get Recipe by name
+
+router.get("/:name", async (req, res) => {
+    const { name } = req.params;
     try {
-        const query = {
-            where: {
-                id: recipeId,
-                userId: ownerId,
-            },
-        };
-
-        const entries = await Recipe.find(query);
-        res.status(201).json({ entries });
+        const results = await Recipe.findAll({
+            where: { name: name }
+        });
+        res.status(200).json(results);
     } catch (err) {
         res.status(500).json({ error: err });
     }
@@ -93,7 +105,7 @@ router.delete("/delete/:id", validateJWT,  async (req, res) => {
 //edit
 router.put("/update/:recipeId", validateJWT, async (req, res) => {
 // router.put("/update/:recipeId", async (req, res) => {
-    const { name, directions, cookTime, servingSize, category } = req.body.recipe;
+    const { name, directions, cookTime, servingSize, category, ingredients, substitutions } = req.body.recipe;
     const recipeId = req.params.recipeId;
     const { id } = req.user;
 
@@ -109,8 +121,8 @@ router.put("/update/:recipeId", validateJWT, async (req, res) => {
         cookTime: cookTime,
         servingSize: servingSize,
         category: category,
-        ingredients,
-        substitutions,
+        ingredients: ingredients,
+        substitutions: substitutions,
         userId: id
     };
 
