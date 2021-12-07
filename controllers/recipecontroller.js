@@ -69,7 +69,7 @@ router.get("/:name", async (req, res) => {
     try {
         const results = await Recipe.findAll({
             where: { name: name }
-        });
+        });5
         res.status(200).json(results);
     } catch (err) {
         res.status(500).json({ error: err });
