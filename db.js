@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize(`postgres://postgres:${encodeURIComponent(process.env.PASS)}@localhost:5432/click-n-cook`,
-{
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres'
 }
 );
