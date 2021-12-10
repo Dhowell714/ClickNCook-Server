@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize("postgres://postgres:16e178946be14ab9abd46a256ad6b0ce@localhost:5432/clickncook");
+
+const sequelize = new Sequelize("postgres://postgres:YourPassword@localhost:5432/click-n-cook");
+
 
 module.exports = sequelize;
