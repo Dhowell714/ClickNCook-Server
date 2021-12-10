@@ -141,7 +141,7 @@ router.put("/update/:recipeId", validateJWT, async (req, res) => {
 module.exports = router; 
 
 router.get('/practice', (req, res) => {
-    
+
     res.status(200).json({ message: 'Hey! This  practice!'})
 });
 // 12
