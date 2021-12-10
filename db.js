@@ -1,7 +1,10 @@
 const Sequelize = require('sequelize');
 
 
-const sequelize = new Sequelize("postgres://postgres:YourPassword@localhost:5432/click-n-cook");
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres'
+}
+);
 
 
 module.exports = sequelize;
