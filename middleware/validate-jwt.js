@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
-
 const validateJWT = async (req, res, next) => {
+    // console.log(req.headers)
     if (req.method == "OPTIONS") {
         next();
     } else if (
@@ -26,7 +26,7 @@ const validateJWT = async (req, res, next) => {
             console.log("foundUser -->", foundUser);
 
             if (foundUser) {
-                console.log("request -->", req);
+               // console.log("request -->", req);
                 req.user = foundUser;
                 next();
             } else {
