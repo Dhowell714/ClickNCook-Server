@@ -20,6 +20,7 @@ router.post("/create", validateJWT, async (req, res) => {
         userId: id
     };
     try {
+        
         const newRecipe = await Recipe.create(recipeEntry);
         res.status(201).json({
             message: "Item successfully created",

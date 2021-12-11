@@ -11,7 +11,7 @@ const validateJWT = async (req, res, next) => {
         const { authorization } = req.headers;
         console.log("authorization -->", authorization);
         const payload = authorization
-         ? jwt.verify(token,
+         ? jwt.verify(
              authorization.includes("Bearer")
               ? authorization.split(" ")[1]
               : authorization,
