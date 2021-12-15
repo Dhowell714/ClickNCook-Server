@@ -25,6 +25,7 @@ router.post("/create", validateJWT, async (req, res) => {
             name: newRecipe,
         });
     } catch (err) {
+        console.log(err)
         res.status(500).json({
             message: "Failed to register submission"});
     }
