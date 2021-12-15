@@ -4,6 +4,7 @@ let validateJWT = require("../middleware/validate-jwt");
 let {Recipe} = require("../models");
 
 
+
 //create
 router.post("/create", validateJWT, async (req, res) => {
     const { name, directions, cookTime, servingSize, category, ingredients, substitutions } = req.body.recipe;
@@ -139,3 +140,11 @@ router.put("/update/:recipeId", validateJWT, async (req, res) => {
 
 
 module.exports = router; 
+
+router.get('/practice', (req, res) => {
+
+    res.status(200).json({ message: 'Hey! This  practice!'})
+});
+// 12
+module.exports = router;
+
