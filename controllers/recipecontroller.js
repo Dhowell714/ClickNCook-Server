@@ -41,29 +41,6 @@ router.get("/all", validateJWT, async (req, res) => {
     }
 });
 
-// //get spcific recipe
-// router.get("/recipe/:id", validateJWT, async (req, res) => {
-// // router.get("/recipe/ :id", async (req, res) => {
-//     const { recipeId } = req.params.id;
-//     const { ownerId } = req.user.id;
-
-//     try {
-//         const query = {
-//             where: {
-//                 id: recipeId,
-//                 userId: ownerId,
-//             },
-//         };
-
-//         const entries = await Recipe.find(query);
-//         res.status(201).json({ entries });
-//     } catch (err) {
-//         res.status(500).json({ error: err });
-//     }
-// });
-
-//Get Recipe by name
-
 router.get("/:name", async (req, res) => {
     const { name } = req.params;
     try {
@@ -76,7 +53,19 @@ router.get("/:name", async (req, res) => {
     }
 });
 
-
+router.get("/mine", validateJWT, async (req, res) => {
+    const { id } = req.user;
+    try {
+        const userRecipes = await RecipeModel.findAll({
+            where: {
+                owner: id
+            }
+        });
+        res.status(200).json(userRecipes);
+    } catch(err) {
+        res.status(500).json({ error: err });
+    }
+});
 
 // delete
 router.delete("/delete/:id", validateJWT,  async (req, res) => {
