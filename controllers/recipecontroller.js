@@ -68,6 +68,19 @@ router.get("/:name", async (req, res) => {
     }
 });
 
+router.get("/:category", async (req, res) => {
+    const { category } = req.params;
+    try {
+        const results = await Recipe.findAll({
+            where: { category: category }
+        });5
+        res.status(200).json(results);
+    } catch (err) {
+        res.status(500).json({ error: err });
+        
+    }
+});
+
 // delete
 router.delete("/delete/:id", validateJWT,  async (req, res) => {
 // router.delete("/delete/:id", async (req, res) => {
