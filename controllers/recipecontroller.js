@@ -82,16 +82,16 @@ router.get("/:category", validateJWT, async (req, res) => {
 });
 
 // delete
-router.delete("/delete/:id", validateJWT,  async (req, res) => {
+router.delete("/delete/:name", validateJWT,  async (req, res) => {
 // router.delete("/delete/:id", async (req, res) => {
-    const recipeId = req.params.id;
+    const name = req.params;
     const ownerId = req.user.id;
 
     try {
 
         const query = {
             where: {
-                id: recipeId,
+                name: name,
                 userId: ownerId,
             },
         };
@@ -109,12 +109,13 @@ router.delete("/delete/:id", validateJWT,  async (req, res) => {
 router.put("/update/:recipeId", validateJWT, async (req, res) => {
 // router.put("/update/:recipeId", async (req, res) => {
     const { name, directions, cookTime, servingSize, category, ingredients, substitutions } = req.body.recipe;
-    const recipeId = req.params.recipeId;
+    const name = req.params.recipeId;
     const { id } = req.user;
 
     const query = {
         where: {
-            id: recipeId,
+            name: name,
+            userId: id
         },
     };
 
