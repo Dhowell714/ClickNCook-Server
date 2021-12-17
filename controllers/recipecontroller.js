@@ -40,7 +40,7 @@ router.get("/all", validateJWT, async (req, res) => {
         res.status(500).json({ error: err });
     }
 });
-
+// line 43
 router.get("/mine", validateJWT, async (req, res) => {
     const { id } = req.user;
     try {
@@ -60,7 +60,7 @@ router.get("/:name", async (req, res) => {
     try {
         const results = await Recipe.findAll({
             where: { name: name }
-        });5
+        });
         res.status(200).json(results);
     } catch (err) {
         res.status(500).json({ error: err });
@@ -68,7 +68,7 @@ router.get("/:name", async (req, res) => {
 });
 
 // delete
-router.delete("/delete/:id", validateJWT,  async (req, res) => {
+router.delete("/delete/:name", validateJWT,  async (req, res) => {
 // router.delete("/delete/:id", async (req, res) => {
     const recipeId = req.params.id;
     const ownerId = req.user.id;
