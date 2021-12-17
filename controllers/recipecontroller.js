@@ -109,7 +109,7 @@ router.delete("/delete/:name", validateJWT,  async (req, res) => {
 router.put("/update/:recipeId", validateJWT, async (req, res) => {
 // router.put("/update/:recipeId", async (req, res) => {
     const { name, directions, cookTime, servingSize, category, ingredients, substitutions } = req.body.recipe;
-    const name = req.params.recipeId;
+    const name = req.params
     const { id } = req.user;
 
     const query = {
