@@ -11,9 +11,15 @@ app.use(require("./middleware/validate-jwt"));
 
 app.use("/recipe", controllers.recipecontroller);
 
+<<<<<<< HEAD
+db.authenticate()
+  .then(() => db.sync()) // => {force: true}
+  // .then(() => db.sync({force: true}) )
+=======
 dbConnection.authenticate()
    //.then(() => dbConnection.sync({force: true}))
   .then(() => dbConnection.sync())
+>>>>>>> 84d0a6b15f0c44fae7445ce0bc2a4d6a9f9b1925
   .then(() => {
     app.listen(process.env.PORT, () =>
       console.log(`[Server: ] App is listening on Port ${process.env.PORT}`)
