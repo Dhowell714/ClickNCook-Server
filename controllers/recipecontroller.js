@@ -4,7 +4,6 @@ let validateJWT = require("../middleware/validate-jwt");
 let {Recipe} = require("../models");
 
 
-
 //create
 router.post("/create", validateJWT, async (req, res) => {
     const { name, directions, cookTime, servingSize, category, ingredients, substitutions } = req.body.recipe;
@@ -42,43 +41,31 @@ router.get("/all", validateJWT, async (req, res) => {
     }
 });
 
-
-
-// //get spcific recipe
-// router.get("/recipe/:id", validateJWT, async (req, res) => {
-// // router.get("/recipe/ :id", async (req, res) => {
-//     const { recipeId } = req.params.id;
-//     const { ownerId } = req.user.id;
-
-//     try {
-//         const query = {
-//             where: {
-//                 id: recipeId,
-//                 userId: ownerId,
-//             },
-//         };
-
-//         const entries = await Recipe.find(query);
-//         res.status(201).json({ entries });
-//     } catch (err) {
-//         res.status(500).json({ error: err });
-//     }
-// });
-
-//Get Recipe by name
+router.get("/mine", validateJWT, async (req, res) => {
+    const { id } = req.user;
+    try {
+        const userRecipes = await Recipe.findAll({
+            where: {
+                userId: id
+            }
+        });
+        res.status(200).json(userRecipes);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
 
 router.get("/:name", async (req, res) => {
     const { name } = req.params;
     try {
         const results = await Recipe.findAll({
             where: { name: name }
-        });
+        });5
         res.status(200).json(results);
     } catch (err) {
         res.status(500).json({ error: err });
     }
 });
-
 
 // delete
 router.delete("/delete/:id", validateJWT,  async (req, res) => {
@@ -139,11 +126,3 @@ router.put("/update/:recipeId", validateJWT, async (req, res) => {
 
 
 module.exports = router; 
-
-router.get('/practice', (req, res) => {
-
-    res.status(200).json({ message: 'Hey! This  practice!'})
-});
-// 12
-module.exports = router;
-
