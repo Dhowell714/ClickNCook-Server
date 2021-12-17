@@ -27,7 +27,8 @@ router.post("/register", async (req, res) => {
         });
     } else {
     res.status(500).json({
-        message: "Failed to register user"
+        message: "Failed to register user",
+        error: err
     });
     }
 };
@@ -70,6 +71,7 @@ router.post("/login", async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: "Failed to login",
+            error: error
         });
     }
 });
