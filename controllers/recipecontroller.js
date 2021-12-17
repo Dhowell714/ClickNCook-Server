@@ -41,6 +41,20 @@ router.get("/all", validateJWT, async (req, res) => {
     }
 });
 
+router.get("/mine", validateJWT, async (req, res) => {
+    const { id } = req.user;
+    try {
+        const userRecipes = await Recipe.findAll({
+            where: {
+                userId: id
+            }
+        });
+        res.status(200).json(userRecipes);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
+
 router.get("/:name", async (req, res) => {
     const { name } = req.params;
     try {
@@ -49,20 +63,6 @@ router.get("/:name", async (req, res) => {
         });5
         res.status(200).json(results);
     } catch (err) {
-        res.status(500).json({ error: err });
-    }
-});
-
-router.get("/mine", validateJWT, async (req, res) => {
-    const { id } = req.user;
-    try {
-        const userRecipes = await RecipeModel.findAll({
-            where: {
-                owner: id
-            }
-        });
-        res.status(200).json(userRecipes);
-    } catch(err) {
         res.status(500).json({ error: err });
     }
 });
