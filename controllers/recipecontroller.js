@@ -46,7 +46,7 @@ router.get("/mine", validateJWT, async (req, res) => {
     try {
         const userRecipes = await Recipe.findAll({
             where: {
-                owner: id
+                userId: id
             }
         });
         res.status(200).json(userRecipes);
@@ -66,8 +66,6 @@ router.get("/:name", async (req, res) => {
         res.status(500).json({ error: err });
     }
 });
-
-
 
 // delete
 router.delete("/delete/:id", validateJWT,  async (req, res) => {
