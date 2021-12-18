@@ -84,7 +84,7 @@ router.get("/category/:category", async (req, res) => {
 // delete
 router.delete("/delete/:name", validateJWT,  async (req, res) => {
 // router.delete("/delete/:id", async (req, res) => {
-    const name = req.params;
+    const {name} = req.params;
     const ownerId = req.user.id;
 
     try {
