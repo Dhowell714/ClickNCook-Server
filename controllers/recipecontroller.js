@@ -68,7 +68,7 @@ router.get("/:name", async (req, res) => {
     }
 });
 
-router.get("/:category", validateJWT, async (req, res) => {
+router.get("/:category", async (req, res) => {
     const { category } = req.params;
     try {
         const results = await Recipe.findAll({
